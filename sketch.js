@@ -40,7 +40,7 @@ function setup() {
   help.position(EPIC[0]+50, EPIC[1]+60)
 
   printbutton = createButton('Print');
-  printbutton.position(EPIC[0]+190, EPIC[1]+20);
+  printbutton.position(EPIC[0]+150, EPIC[1]+30);
   printbutton.mousePressed(printtrash);
 
   grid = make2DArray(cols, rows);
