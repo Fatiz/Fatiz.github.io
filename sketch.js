@@ -25,18 +25,18 @@ function setup() {
 
 
 
-  button = createButton('reset');
+  button = createButton('Reset / apply cols and rows');
   button.position(EPIC[0]+150, EPIC[1]+20);
   button.mousePressed(bpress);
   // Make slider
-  rowslider = createSlider(1,50, 50, 1);
+  rowslider = createSlider(1,50, 14, 1);
   rowslider.position(EPIC[0]+50, EPIC[1]+20);
   rowslider.style('width', '80px');
 
   sizetxt = createElement('h2', 'Cols:'+cols+ '  ' + 'Rows: '+rows);
   sizetxt.position(EPIC[0]+50, EPIC[1]+40)
 
-  help = createElement('h2', 'Press f12 to see output');
+  help = createElement('h2', 'Press F12 to see output');
   help.position(EPIC[0]+50, EPIC[1]+60)
 
   printbutton = createButton('Print');
