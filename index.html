@@ -240,7 +240,7 @@ span.psw {
 <!--Make sure the form has the autocomplete function switched off:-->
 <form autocomplete="off">
   <div class="autocomplete" style="width:300px;">
-    <input id="myInput" type="text" name="item" placeholder="Hand Cannon" style="background-color: #faeafc;">
+    <input id="myInput" type="text" name="item" placeholder="Handcannon" style="background-color: #faeafc;">
     <button type="button" id="SearchButton" onclick="searchMarket(item.value)" class="button bannerSpecial">Search</button>
   </div>
 </form>
@@ -472,7 +472,7 @@ function autocomplete(inp, arr) {
           b.innerHTML = "<strong style='color: #ff3f05; font-weight: 300';> " + arr[i].substr(0, val.length) + "</strong>";
           b.innerHTML += arr[i].substr(val.length);
           /*insert a input field that will hold the current array item's value:*/
-          b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+          b.innerHTML += '<input type="hidden" value="' + arr[i] + '">'; // Change back to hidden
           /*execute a function when someone clicks on the item value (DIV element):*/
           b.addEventListener("click", function(e) {
               /*insert the value for the autocomplete text field:*/
