@@ -3,6 +3,7 @@
 <head>
 <title> Rotf Market </title>
 <link rel="stylesheet" type="text/css" href="main.css">
+<link rel="icon" type="image/png" href="favicon.png" id="icon">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
 * {
@@ -319,6 +320,7 @@ function loginuser(email,psw) {
         //console.log(response.getElementsByTagName("name")[0].innerHTML)
         var el = document.createElement('html'); 
         el.innerHTML = response.documentElement.innerHTML;
+        document.getElementById("icon").setAttribute('href','favicon2.png') // We couldn't decide which icon to use so we change it when you login :P
         document.getElementsByClassName("loginbutton")[0].innerHTML = "Logged in as: "+ el.getElementsByTagName('name')[0].innerHTML;
         var accfame = parseInt(el.getElementsByTagName('fame')[0].innerText) + " "
         loggedin = true;
