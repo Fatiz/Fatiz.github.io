@@ -211,7 +211,6 @@ span.psw {
 <body>
 <section id="banner">
 <h1>Auction House Search</h1>
-
 <span class='loginbutton'>
  <!--  <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;" class="button bannerSpecial">Login</button> -->
 </span>
@@ -245,14 +244,14 @@ span.psw {
     <button type="button" id="SearchButton" onclick="searchMarket(item.value)" class="button bannerSpecial">Search</button>
   </div>
 </form>
-
+<small style="font-weight: 50; font-size: 75%;"><i><em>Items purchased through the Auction House may be delayed up to 2 minutes from time of purchase.<em></i></small>
 <div class="table">
   <table style="height: 34px; position: absolute; top: auto;" width="800">
     <tbody id='tablelist'>
       <tr id='headerrow'>
         <td style="width: 130px; height: 60px;"><b>Item</b></td>
         <td style="width: 132px;"><b>Seller</b></td>
-        <td style="width: 132px;"><b>Price</b></td>
+        <td id='cost' style="width: 132px;"><b>Price</b></td>
         <td style="width: 132px;"><b>Time left</b></td>
         <td style="width: 132px;"><b>Buy</b></td>
       </tr>
@@ -351,6 +350,7 @@ function searchMarket(search) {
   if(loggedin == true) {
     var header = document.getElementById("headerrow")
     buydataarray = []
+    var totalprice = 0
     document.getElementById("tablelist").innerHTML = ""
     document.getElementById("tablelist").appendChild(header)
     getHTML(proxyurl + "http://192.223.31.195/auctionHouse/search?g="+useremail+"cacheBust=381072&search="+search+"&password="+userpsw+"&guid="+useremail+"&ignore=2094010&ignoreId=48186&gameClientVersion=X2%2E2", function (response) {
@@ -391,6 +391,7 @@ function searchMarket(search) {
         accid = el.getElementsByTagName('accid')[i].textContent
         realtime = el.getElementsByTagName('time')[i].textContent
         pricevalue = el.getElementsByTagName('price')[i].textContent
+        totalprice = parseInt(el.getElementsByTagName('price')[i].textContent) + totalprice
         saleid = el.getElementsByTagName('saleid')[i].textContent
         typeid = el.getElementsByTagName('type')[i].textContent
         buy.setAttribute('id', i)
@@ -410,7 +411,10 @@ function searchMarket(search) {
         row.appendChild(time);
         row.appendChild(buy);
         document.getElementById('tablelist').appendChild(row)
+        
       }
+      document.getElementById("cost").textContent = "Price "+"- Avg. "+Math.round((totalprice/buydataarray.length))+""
+      document.getElementById('cost').appendChild(fameimg)
     });
   } else {
     modal.style.display = 'inline'
