@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<title> Rotf Market </title>
+<link rel="stylesheet" type="text/css" href="main.css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
 * {
@@ -35,6 +37,13 @@ input[type=submit] {
   cursor: pointer;
 }
 
+body {
+  background-image: url('https://rotf.io/images/banner-blurred.png');
+  background-size: cover;
+  background-position: top;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
 .autocomplete-items {
   position: absolute;
   border: 1px solid #d4d4d4;
@@ -45,6 +54,11 @@ input[type=submit] {
   top: 100%;
   left: 0;
   right: 0;
+}
+#banner {
+  padding: 12em 0 10em 0;
+
+  text-align: center;
 }
 
 .autocomplete-items div {
@@ -64,23 +78,367 @@ input[type=submit] {
   background-color: DodgerBlue !important; 
   color: #ffffff; 
 }
+
+/* Full-width input fields */
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: solid 1px #dbdbdb;
+  box-sizing: border-box;
+  background: rgba(255, 255, 255, 0.7);
+  color: #7840CC;
+}
+
+
+body, input, select, textarea {
+  color: #fffdfd; /*/#9a9a9a;*/
+  font-family: "Raleway", Arial, Helvetica, sans-serif;
+  font-size: 13pt;
+  font-weight: 300;
+  line-height: 1.65;
+}
+
+
+
+/* Set a style for all buttons */
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+
+
+img.avatar {
+  width: 40%;
+  border-radius: 50%;
+}
+
+.container {
+  padding: 16px;
+}
+
+span.psw {
+  float: right;
+  padding-top: 16px;
+}
+.button.bannerSpecial {
+    font-size: 1.5em;
+    background-color: #fff;
+    color: #7840CC !important;
+}
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  padding-top: 60px;
+}
+.loginbutton {
+  width: 150px;
+  word-wrap: break-word;
+}
+/* Modal Content/Box */
+.modal-content {
+  background-color: #5c297e;
+  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 1px solid #888;
+  width: 65%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button (x) */
+.close {
+  position: absolute;
+  right: 25px;
+  top: 0;
+  color: #000;
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: red;
+  cursor: pointer;
+}
+
+/* Add Zoom Animation */
+.animate {
+  -webkit-animation: animatezoom 0.6s;
+  animation: animatezoom 0.6s
+}
+
+@-webkit-keyframes animatezoom {
+  from {-webkit-transform: scale(0)} 
+  to {-webkit-transform: scale(1)}
+}
+  
+@keyframes animatezoom {
+  from {transform: scale(0)} 
+  to {transform: scale(1)}
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+  span.psw {
+     display: block;
+     float: none;
+  }
+  .cancelbtn {
+     width: 100%;
+  }
+}
 </style>
 </head>     
 <body>
+<section id="banner">
+<h1>Auction House Search</h1>
 
-<h2>Autocomplete</h2>
+<span class='loginbutton'>
+ <!--  <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;" class="button bannerSpecial">Login</button> -->
+</span>
+<div id="id01" class="modal" style="display: block;">
+  
+  <form class="modal-content animate">
+    <div class="imgcontainer">
+      <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+    </div>
 
-<p>Start typing:</p>
+    <div class="container" id="loginbox">
+      <h2>You must login to your Rotf account to use this website</h2>
+      <label for="uname" style="font-size: 14"><b>Email</b></label>
+      <input type="text" placeholder="Enter Email" name="email" required>
+
+      <label for="psw"><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" name="psw" required>
+        
+      <button type="button" onclick="loginuser(email,psw)" class="button bannerSpecial">Login</button>
+    </div>
+
+  </form>
+</div>
+<p>Start typing...</p>
+
 
 <!--Make sure the form has the autocomplete function switched off:-->
-<form autocomplete="off" action="/action_page.php">
+<form autocomplete="off">
   <div class="autocomplete" style="width:300px;">
-    <input id="myInput" type="text" name="myCountry" placeholder="Country">
+    <input id="myInput" type="text" name="item" placeholder="Hand Cannon" style="background-color: #faeafc;">
+    <button type="button" onclick="searchMarket(item.value)" class="button bannerSpecial">Search</button>
   </div>
-  <input type="submit">
 </form>
 
-<script>
+<div class="table">
+  <table style="height: 34px; position: absolute; top: auto;" width="800">
+    <tbody id='tablelist'>
+      <tr id='headerrow'>
+        <td style="width: 130px; height: 60px;"><b>Item</b></td>
+        <td style="width: 132px;"><b>Seller</b></td>
+        <td style="width: 132px;"><b>Price</b></td>
+        <td style="width: 132px;"><b>Time left</b></td>
+        <td style="width: 132px;"><b>Buy</b></td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>
+
+
+
+<script type="text/javascript">
+
+var loggedin = false
+var useremail = null
+var userpsw = null
+var userfame = null
+var buydataarray = []
+var fame = document.createElement('label')
+fame.style.display = 'none';
+fame.setAttribute('id', 'fame')
+var br = document.createElement('br');
+//fame img
+var fameimg = document.createElement('img')
+fameimg.setAttribute("src", "fame.png");
+fameimg.style.display = 'none';
+
+var getHTML = function ( url, callback ) {
+
+  // Feature detection
+  if ( !window.XMLHttpRequest ) return;
+
+  // Create new request
+  var xhr = new XMLHttpRequest();
+
+  // Setup callback
+  xhr.onload = function() {
+    if ( callback && typeof( callback ) === 'function' ) {
+      callback( this.responseXML );
+    }
+  }
+
+  // Get the HTML
+  xhr.open( 'GET', url );
+  xhr.responseType = 'document';
+  xhr.send();
+
+};
+
+
+
+var badlogin = document.createElement('label')
+badlogin.className = 'error';
+badlogin.textContent = "Bad Login";
+badlogin.style.display = 'none';
+document.getElementById('loginbox').appendChild(badlogin)
+function loginuser(email,psw) {
+
+
+  const proxyurl = "https://cors-anywhere.herokuapp.com/"; // some CORS stuff lmao
+  getHTML( proxyurl+'http://192.223.31.195/account/verify?ignore=3548773&guid='+email.value+'&gameClientVersion=X2.2&cacheBust=522542&password='+psw.value, function (response) {
+      //console.log('http://192.223.31.195/account/verify?ignore=3548773&guid='+email.value+'&gameClientVersion=X2.2&cacheBust=522542&password='+psw.value)
+      if(response.documentElement.innerHTML == "Bad Login") {
+        badlogin.style.display = 'inline';
+      } else if(response.getElementsByTagName('name') != null){
+        //console.log(response.getElementsByTagName("name")[0].innerHTML)
+        var el = document.createElement('html'); 
+        el.innerHTML = response.documentElement.innerHTML;
+        document.getElementsByClassName("loginbutton")[0].innerHTML = "Logged in as: "+ el.getElementsByTagName('name')[0].innerHTML;
+        var accfame = parseInt(el.getElementsByTagName('fame')[0].innerText) + " "
+        loggedin = true;
+        document.getElementsByClassName('loginbutton')[0].appendChild(br)
+        document.getElementsByClassName('loginbutton')[0].appendChild(fame)
+        document.getElementsByClassName('loginbutton')[0].appendChild(fameimg)
+        modal.style.display = 'none';
+        fame.style.display = 'inline';
+        useremail = email.value;
+        userpsw = psw.value;
+        userfame = parseInt(el.getElementsByTagName('fame')[0].innerText)
+        fame.textContent = "Fame: "+(accfame);
+        fameimg.style.display = 'inline';
+
+
+        //document.documentElement.innerHTML = response.documentElement.body.account.stats.fame.innerHTML;
+      }
+      
+
+  });  
+}
+
+
+function searchMarket(search) {
+
+  const proxyurl = "https://cors-anywhere.herokuapp.com/"; // some CORS stuff lmao
+  
+
+  if(loggedin == true) {
+    var header = document.getElementById("headerrow")
+    buydataarray = []
+    document.getElementById("tablelist").innerHTML = ""
+    document.getElementById("tablelist").appendChild(header)
+    getHTML(proxyurl + "http://192.223.31.195/auctionHouse/search?g="+useremail+"cacheBust=381072&search="+search+"&password="+userpsw+"&guid="+useremail+"&ignore=2094010&ignoreId=48186&gameClientVersion=X2%2E2", function (response) {
+      //console.log("http://192.223.31.195/auctionHouse/search?g="+useremail+"cacheBust=381072&search="+search+"&password="+userpsw+"&guid="+useremail+"&ignore=2094010&ignoreId=48186&gameClientVersion=X2%2E2")
+      var el = document.createElement('html');
+      el.innerHTML = response.documentElement.innerHTML;
+      //document.documentElement.innerHTML = el.innerHTML
+      //console.log(el.getElementsByTagName('result').length) // how many
+      //for loop
+      var i; 
+      for(i=0; i<el.getElementsByTagName('result').length; i++) {
+        var row = document.createElement('tr')
+        item = document.createElement('td')
+        item.textContent = search
+        item.setAttribute("style", "height: 60px;")
+        seller = document.createElement('td')
+        seller.textContent = el.getElementsByTagName('seller')[i].textContent
+        seller.setAttribute("style", "height: 60px;")
+        price = document.createElement('td')
+        price.textContent = el.getElementsByTagName('price')[i].textContent + " "
+        price.setAttribute("style", "height: 60px;  width: 40px;")
+        fame = document.createElement('img')
+        fame.setAttribute('src', 'fame.png')
+        price.appendChild(fame)
+        time = document.createElement('td')
+        time.textContent = el.getElementsByTagName('hours')[i].textContent + " Hours"
+        time.setAttribute("style", "height: 60px;")
+        buy = document.createElement('button')
+        buy.setAttribute('type', 'button')
+        buy.setAttribute('style', 'width: 50%; height: 80%;')
+        // cancer
+
+        accid = el.getElementsByTagName('accid')[i].textContent
+        realtime = el.getElementsByTagName('time')[i].textContent
+        pricevalue = el.getElementsByTagName('price')[i].textContent
+        saleid = el.getElementsByTagName('saleid')[i].textContent
+        typeid = el.getElementsByTagName('type')[i].textContent
+        buy.setAttribute('id', i)
+        //what
+        buydataarray.push([accid,realtime,pricevalue,typeid,saleid,buy.id])
+        //console.log(buydataarray[i])
+
+        buy.setAttribute('onclick', "PurchaseItem.apply(null, buydataarray[id])")
+        buy.textContent = "Buy"
+        buy.setAttribute('class', 'button bannerSpecial')
+
+// <button type="button" onclick="loginuser(email,psw)">Login</button>
+
+
+        row.appendChild(item);
+        row.appendChild(seller);
+        row.appendChild(price);
+        row.appendChild(time);
+        row.appendChild(buy);
+        document.getElementById('tablelist').appendChild(row)
+      }
+
+
+
+
+    });
+  } else {
+    modal.style.display = 'inline'
+  }
+}
+
+//http://192.223.31.195/auctionHouse/buy?g=fatizmailbox@gmail.comcacheBust=759569&id=2306792&time=636812424534898655&password=apples&type=21255&guid=fatizmailbox@gmail.com&ignore=1899964&price=10000&accId=24668&gameClientVersion=X2.2E2
+function PurchaseItem(accID, time, price, type, saleID, butid) {
+  const proxyurl = "https://cors-anywhere.herokuapp.com/"; // some CORS stuff lmao
+  //console.log(accID,time,price,type,saleID);
+  //console.log(loggedin, userfame)
+  if(loggedin == true && userfame > price){
+    getHTML(proxyurl + "http://192.223.31.195/auctionHouse/buy?g="+useremail+"cacheBust=759569&id="+saleID+"&time="+time+"&password="+userpsw+"&type="+type+"&guid="+useremail+"&ignore=1899964&price="+price+"&accId="+accID+"&gameClientVersion=X2.2E2", function (response) {
+      //console.log("http://192.223.31.195/auctionHouse/buy?g="+useremail+"cacheBust=759569&id="+saleID+"&time="+time+"&password="+userpsw+"&type="+type+"&guid="+useremail+"&ignore=1899964&price="+price+"&accId="+accID+"&gameClientVersion=X2.2E2")
+      userfame = (userfame-price)
+      document.getElementById('fame').textContent = "Fame: " + (userfame);
+      //console.log(document.getElementById('fame').textContent)
+      document.getElementById(butid).textContent = 'Gone'
+      document.getElementById(butid).setAttribute('disabled', 'true')
+    });
+  } else if(loggedin == false) {
+    modal.style.display = 'inline';
+  } else if(userfame < price){
+    document.getElementById(butid).textContent = "Not Enough Fame!"
+    setTimeout(function(){document.getElementById(butid).textContent = "Buy"}, 1000);
+  }
+}
+
+
 function autocomplete(inp, arr) {
   /*the autocomplete function takes two arguments,
   the text field element and an array of possible autocompleted values:*/
@@ -178,12 +536,24 @@ function autocomplete(inp, arr) {
   });
 }
 
-/*An array containing all the country names in the world:*/
-var countries = ["Afghanistan","Albania","Algeria","Andorra","Angola","Anguilla","Antigua & Barbuda","Argentina","Armenia","Aruba","Australia","Austria","Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belize","Benin","Bermuda","Bhutan","Bolivia","Bosnia & Herzegovina","Botswana","Brazil","British Virgin Islands","Brunei","Bulgaria","Burkina Faso","Burundi","Cambodia","Cameroon","Canada","Cape Verde","Cayman Islands","Central Arfrican Republic","Chad","Chile","China","Colombia","Congo","Cook Islands","Costa Rica","Cote D Ivoire","Croatia","Cuba","Curacao","Cyprus","Czech Republic","Denmark","Djibouti","Dominica","Dominican Republic","Ecuador","Egypt","El Salvador","Equatorial Guinea","Eritrea","Estonia","Ethiopia","Falkland Islands","Faroe Islands","Fiji","Finland","France","French Polynesia","French West Indies","Gabon","Gambia","Georgia","Germany","Ghana","Gibraltar","Greece","Greenland","Grenada","Guam","Guatemala","Guernsey","Guinea","Guinea Bissau","Guyana","Haiti","Honduras","Hong Kong","Hungary","Iceland","India","Indonesia","Iran","Iraq","Ireland","Isle of Man","Israel","Italy","Jamaica","Japan","Jersey","Jordan","Kazakhstan","Kenya","Kiribati","Kosovo","Kuwait","Kyrgyzstan","Laos","Latvia","Lebanon","Lesotho","Liberia","Libya","Liechtenstein","Lithuania","Luxembourg","Macau","Macedonia","Madagascar","Malawi","Malaysia","Maldives","Mali","Malta","Marshall Islands","Mauritania","Mauritius","Mexico","Micronesia","Moldova","Monaco","Mongolia","Montenegro","Montserrat","Morocco","Mozambique","Myanmar","Namibia","Nauro","Nepal","Netherlands","Netherlands Antilles","New Caledonia","New Zealand","Nicaragua","Niger","Nigeria","North Korea","Norway","Oman","Pakistan","Palau","Palestine","Panama","Papua New Guinea","Paraguay","Peru","Philippines","Poland","Portugal","Puerto Rico","Qatar","Reunion","Romania","Russia","Rwanda","Saint Pierre & Miquelon","Samoa","San Marino","Sao Tome and Principe","Saudi Arabia","Senegal","Serbia","Seychelles","Sierra Leone","Singapore","Slovakia","Slovenia","Solomon Islands","Somalia","South Africa","South Korea","South Sudan","Spain","Sri Lanka","St Kitts & Nevis","St Lucia","St Vincent","Sudan","Suriname","Swaziland","Sweden","Switzerland","Syria","Taiwan","Tajikistan","Tanzania","Thailand","Timor L'Este","Togo","Tonga","Trinidad & Tobago","Tunisia","Turkey","Turkmenistan","Turks & Caicos","Tuvalu","Uganda","Ukraine","United Arab Emirates","United Kingdom","United States of America","Uruguay","Uzbekistan","Vanuatu","Vatican City","Venezuela","Vietnam","Virgin Islands (US)","Yemen","Zambia","Zimbabwe"];
+/*An array containing all the items names*/
+var items = [];
 
-/*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
-autocomplete(document.getElementById("myInput"), countries);
+autocomplete(document.getElementById("myInput"), items);
+
+var modal = document.getElementById('id01');
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
+
+
 </script>
+</section>
 
 </body>
 </html>
