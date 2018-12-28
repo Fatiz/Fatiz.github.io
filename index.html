@@ -416,7 +416,9 @@ function searchMarket(search) {
         
       }
       document.getElementById("cost").textContent = "Price "+"- Avg. "+Math.round((totalprice/buydataarray.length))+""
-      document.getElementById('cost').appendChild(fameimg)
+      fame2 = document.createElement('img')
+      fame2.setAttribute('src','fame.png')
+      document.getElementById('cost').appendChild(fame2)
     });
   } else {
     modal.style.display = 'inline'
