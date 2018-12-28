@@ -242,7 +242,7 @@ span.psw {
 <form autocomplete="off">
   <div class="autocomplete" style="width:300px;">
     <input id="myInput" type="text" name="item" placeholder="Hand Cannon" style="background-color: #faeafc;">
-    <button type="button" onclick="searchMarket(item.value)" class="button bannerSpecial">Search</button>
+    <button type="button" id="SearchButton" onclick="searchMarket(item.value)" class="button bannerSpecial">Search</button>
   </div>
 </form>
 
@@ -356,7 +356,12 @@ function searchMarket(search) {
     getHTML(proxyurl + "http://192.223.31.195/auctionHouse/search?g="+useremail+"cacheBust=381072&search="+search+"&password="+userpsw+"&guid="+useremail+"&ignore=2094010&ignoreId=48186&gameClientVersion=X2%2E2", function (response) {
       //console.log("http://192.223.31.195/auctionHouse/search?g="+useremail+"cacheBust=381072&search="+search+"&password="+userpsw+"&guid="+useremail+"&ignore=2094010&ignoreId=48186&gameClientVersion=X2%2E2")
       var el = document.createElement('html');
-      el.innerHTML = response.documentElement.innerHTML;
+      try{
+        el.innerHTML = response.documentElement.innerHTML;
+      } catch {
+        document.getElementById('SearchButton').textContent = "Item not found!"
+        setTimeout(function(){document.getElementById('SearchButton').textContent = "Search"}, 1000);
+      }
       //document.documentElement.innerHTML = el.innerHTML
       //console.log(el.getElementsByTagName('result').length) // how many
       //for loop
@@ -397,7 +402,6 @@ function searchMarket(search) {
         buy.textContent = "Buy"
         buy.setAttribute('class', 'button bannerSpecial')
 
-// <button type="button" onclick="loginuser(email,psw)">Login</button>
 
 
         row.appendChild(item);
@@ -407,10 +411,6 @@ function searchMarket(search) {
         row.appendChild(buy);
         document.getElementById('tablelist').appendChild(row)
       }
-
-
-
-
     });
   } else {
     modal.style.display = 'inline'
@@ -424,6 +424,7 @@ function PurchaseItem(accID, time, price, type, saleID, butid) {
   //console.log(loggedin, userfame)
   if(loggedin == true && userfame > price){
     getHTML(proxyurl + "http://192.223.31.195/auctionHouse/buy?g="+useremail+"cacheBust=759569&id="+saleID+"&time="+time+"&password="+userpsw+"&type="+type+"&guid="+useremail+"&ignore=1899964&price="+price+"&accId="+accID+"&gameClientVersion=X2.2E2", function (response) {
+      
       //console.log("http://192.223.31.195/auctionHouse/buy?g="+useremail+"cacheBust=759569&id="+saleID+"&time="+time+"&password="+userpsw+"&type="+type+"&guid="+useremail+"&ignore=1899964&price="+price+"&accId="+accID+"&gameClientVersion=X2.2E2")
       userfame = (userfame-price)
       document.getElementById('fame').textContent = "Fame: " + (userfame);
