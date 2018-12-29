@@ -2,6 +2,7 @@ var loggedin = false
 var useremail = null
 var userpsw = null
 var userfame = null
+var userrank = null
 var buydataarray = []
 
   /*An array containing all the items names*/
@@ -9,11 +10,8 @@ var items = ["Sweet Sugar Rush Staff", "Shield of Vendettas", "Carnivorous Senti
 
 document.addEventListener("DOMContentLoaded", function(event) {
   var modal = document.getElementById('id01');
-  var badlogin = document.createElement('label')
-  badlogin.className = 'error';
-  badlogin.textContent = "Bad Login";
-  badlogin.style.display = 'none';
-  document.getElementById('loginbox').appendChild(badlogin) 
+
+
   function autocomplete(inp, arr) {
     /*the autocomplete function takes two arguments,
     the text field element and an array of possible autocompleted values:*/
@@ -151,8 +149,13 @@ var getHTML = function ( url, callback ) {
 
 function loginuser(email,psw) {
   const proxyurl = "https://cors-anywhere.herokuapp.com/"; // some CORS stuff lmao
+  var badlogin = document.createElement('label')
+  badlogin.className = 'error';
+  badlogin.textContent = "Bad Login";
+  badlogin.style.display = 'none';
+  document.getElementById('loginbox').appendChild(badlogin) 
   getHTML( proxyurl+'http://192.223.31.195/account/verify?ignore=3548773&guid='+email.value+'&gameClientVersion=X2.2&cacheBust=522542&password='+psw.value, function (response) {
-      //console.log('http://192.223.31.195/account/verify?ignore=3548773&guid='+email.value+'&gameClientVersion=X2.2&cacheBust=522542&password='+psw.value)
+      console.log('http://192.223.31.195/account/verify?ignore=3548773&guid='+email.value+'&gameClientVersion=X2.2&cacheBust=522542&password='+psw.value)
       if(response.documentElement.innerHTML == "Bad Login") {
         badlogin.style.display = 'inline';
       } else if(response.getElementsByTagName('name') != null){
@@ -183,6 +186,13 @@ function loginuser(email,psw) {
         userfame = parseInt(el.getElementsByTagName('fame')[0].innerText)
         fame.textContent = "Fame: "+(accfame);
         fameimg.style.display = 'inline';
+        userrank = parseInt(el.getElementsByTagName('rank')[0].innerText)
+        if(userrank == 4 && document.getElementById('donatewarning') == null) {
+          donatewarning = document.createElement("label")
+          donatewarning.setAttribute('id', 'donatewarning')
+          donatewarning.textContent = "You are unable to purchase items off the auction house as you are P4"
+          document.getElementById('delay').appendChild(donatewarning)
+        }
 
 
         //document.documentElement.innerHTML = response.documentElement.body.account.stats.fame.innerHTML;
@@ -213,10 +223,7 @@ function searchMarket(search) {
         document.getElementById('SearchButton').textContent = "Item not found!"
         setTimeout(function(){document.getElementById('SearchButton').textContent = "Search"}, 1000);
       }
-      //document.documentElement.innerHTML = el.innerHTML
-      //console.log(el.getElementsByTagName('result').length) // how many
-      //for loop
-      var i; 
+      var i;
       for(i=0; i<el.getElementsByTagName('result').length; i++) {
         var row = document.createElement('tr')
         item = document.createElement('td')
@@ -249,11 +256,14 @@ function searchMarket(search) {
         //what
         buydataarray.push([accid,realtime,pricevalue,typeid,saleid,buy.id])
         //console.log(buydataarray[i])
-
-        buy.setAttribute('onclick', "PurchaseItem.apply(null, buydataarray[id])")
-        buy.textContent = "Buy"
-        buy.setAttribute('class', 'button bannerSpecial')
-
+        if(userrank == 4) {
+          buy.setAttribute('disabled', 'true')
+          buy.textContent = "Disabled"
+        } else {
+          buy.setAttribute('onclick', "PurchaseItem.apply(null, buydataarray[id])")
+          buy.textContent = "Buy"
+          buy.setAttribute('class', 'button bannerSpecial')
+        }
 
 
         row.appendChild(item);
@@ -263,7 +273,7 @@ function searchMarket(search) {
         row.appendChild(buy);
         document.getElementById('tablelist').appendChild(row)  
       }
-      document.getElementById("cost").textContent = "Price "+"- Avg. "+Math.round((totalprice/buydataarray.length))+""
+      document.getElementById("cost").textContent = "Price "+"- Avg. "+Math.round((totalprice/buydataarray.length))+" "
       fame2 = document.createElement('img')
       fame2.setAttribute('src','fame.png')
       document.getElementById('cost').appendChild(fame2)
