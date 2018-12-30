@@ -217,7 +217,7 @@ function searchMarket(search) {
     document.getElementById("tablelist").innerHTML = ""
     document.getElementById("tablelist").appendChild(header)
     getHTML(proxyurl + "http://192.223.31.195/auctionHouse/search?g="+useremail+"cacheBust=381072&search="+search+"&password="+userpsw+"&guid="+useremail+"&ignore=2094010&ignoreId=48186&gameClientVersion=X2%2E2", function (response) {
-      //console.log("http://192.223.31.195/auctionHouse/search?g="+useremail+"cacheBust=381072&search="+search+"&password="+userpsw+"&guid="+useremail+"&ignore=2094010&ignoreId=48186&gameClientVersion=X2%2E2")
+      console.log("http://192.223.31.195/auctionHouse/search?g="+useremail+"cacheBust=381072&search="+search+"&password="+userpsw+"&guid="+useremail+"&ignore=2094010&ignoreId=48186&gameClientVersion=X2%2E2")
       var el = document.createElement('html');
       try{
         el.innerHTML = response.documentElement.innerHTML;
@@ -230,22 +230,22 @@ function searchMarket(search) {
         var row = document.createElement('tr')
         item = document.createElement('td')
         item.textContent = search
-        item.setAttribute("style", "height: 60px;")
+        item.setAttribute("style", "height: 60px; color: #7840CC")
         seller = document.createElement('td')
         seller.textContent = el.getElementsByTagName('seller')[i].textContent
-        seller.setAttribute("style", "height: 60px;")
+        seller.setAttribute("style", "height: 60px; color: #7840CC")
         price = document.createElement('td')
         price.textContent = el.getElementsByTagName('price')[i].textContent + " "
-        price.setAttribute("style", "height: 60px;  width: 40px;")
+        price.setAttribute("style", "height: 60px;  width: 40px; color: #7840CC")
         fame = document.createElement('img')
         fame.setAttribute('src', 'fame.png')
         price.appendChild(fame)
         time = document.createElement('td')
         time.textContent = el.getElementsByTagName('hours')[i].textContent + " Hours"
-        time.setAttribute("style", "height: 60px;")
+        time.setAttribute("style", "height: 60px; color: #7840CC")
         buy = document.createElement('button')
         buy.setAttribute('type', 'button')
-        buy.setAttribute('style', 'width: 50%; height: 80%;')
+        buy.setAttribute('style', 'width: 50%; height: 80%; background-color: #8e4bf3; color: #ffffff !important;')
         // cancer
 
         accid = el.getElementsByTagName('accid')[i].textContent

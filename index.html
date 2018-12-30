@@ -37,11 +37,7 @@ input[type=submit] {
 }
 
 body {
-  background-image: url('https://rotf.io/images/banner-blurred.png');
-  background-size: cover;
-  background-position: top;
-  background-attachment: fixed;
-  background-repeat: no-repeat;
+
 }
 .autocomplete-items {
   position: absolute;
@@ -55,11 +51,23 @@ body {
   right: 0;
 }
 #banner {
-  padding: 12em 0 10em 0;
-
+  padding: 12em 0 0em 0;
+  background-image: url('https://rotf.io/images/banner-blurred.png');
+  background-size: cover;
+  background-position: top;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
   text-align: center;
 }
-
+#table {
+  padding: 0em 0 10em 0;
+  background-color: #fff;
+  background-size: cover;
+  background-position: top;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  text-align: center;
+}
 .autocomplete-items div {
   padding: 10px;
   cursor: pointer;
@@ -93,10 +101,10 @@ input[type=text], input[type=password] {
 
 
 body, input, select, textarea {
-  color: #fffdfd; /*/#9a9a9a;*/
+  color: #fffdfd;; /*/#fffdfd;*/ 
   font-family: "Raleway", Arial, Helvetica, sans-serif;
   font-size: 13pt;
-  font-weight: 300;
+  font-weight: 600;
   line-height: 1.65;
 }
 
@@ -140,6 +148,7 @@ span.psw {
   background-color: rgb(0,0,0); /* Fallback color */
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
   padding-top: 60px;
+
 }
 .loginbutton {
   width: 150px;
@@ -212,10 +221,10 @@ span.psw {
 
     <div class="container" id="loginbox">
       <h2>You must login to your RotF account to use this website</h2>
-      <label for="uname" style="font-size: 14"><b>Email</b></label>
+      <label for="uname" style="font-size: 14; color: #fff; font-weight: 100;!important">Email</label>
       <input type="text" style="width: 75%" placeholder="Enter Email" name="email" required>
 
-      <label for="psw"><b>Password</b></label>
+      <label for="psw" style="color: #fff; font-weight: 100; !important">Password</label>
       <input type="password" style="width: 75%"  placeholder="Enter Password" name="psw" required>
         
       <button type="button" onclick="loginuser(email,psw)" class="button bannerSpecial">Login</button>
@@ -233,22 +242,23 @@ span.psw {
     <button type="button" id="SearchButton" onclick="searchMarket(item.value)" class="button bannerSpecial">Search</button>
   </div>
 </form>
-<small id='delay' style="font-weight: 50; font-size: 75%;"><i><em>Items purchased through the Auction House may be delayed up to 2 minutes from time of purchase.<em></i></small>
-<div class="table">
-  <table style="height: 34px; position: absolute; top: auto;" width="800">
-    <tbody id='tablelist'>
-      <tr id='headerrow'>
-        <td style="width: 130px; height: 60px;"><b>Item</b></td>
-        <td style="width: 132px;"><b>Seller</b></td>
-        <td id='cost' style="width: 132px;"><b>Price</b></td>
-        <td style="width: 132px;"><b>Time left</b></td>
-        <td style="width: 132px;"><b>Buy</b></td>
-      </tr>
-
-    </tbody>
-  </table>
-</div>
+<small id='delay' style="font-weight: 50; font-size: 75%;"><i><em>Items purchased through the Auction House may be delayed up to 2 minutes from time of purchase.</em></i></small>
 </section>
+<section id="table">
+  <div class="table">
+    <table style="height: 34px; position: absolute; top: auto;" width="800">
+      <tbody id='tablelist'>
+        <tr id='headerrow'>
+          <td style="width: 130px; height: 60px;"><b>Item</b></td>
+          <td style="width: 132px;"><b>Seller</b></td>
+          <td id='cost' style="width: 132px; color: #7840CC; font-weight: 600;"><b>Price</b></td>
+          <td style="width: 132px;"><b>Time left</b></td>
+          <td style="width: 132px;"><b>Buy</b></td>
+        </tr>
 
+      </tbody>
+    </table>
+  </div>
+</section>
 </body>
 </html>
