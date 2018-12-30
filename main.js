@@ -6,7 +6,7 @@ var userrank = null
 var buydataarray = []
 
   /*An array containing all the items names*/
-var items = ["Sweet Sugar Rush Staff", "Shield of Vendettas", "Carnivorous Sentient Spell", "Candy Robe","Omega Ancient Sword","Alpha Ancient Seal","Ancient Stone Guardian Armor","Janus Eye Ring","Burger K-ring","Bow of the Lightning God","Lightning God Quiver", "Lightning God Armor","Lightning God Ring", "Acid Katana","Acid Star","Acid Armor","Acid Ring","The Searing Blood","PoOoOoOokkErrRr","Tail of the Riverborn","The Winged Wand","Doom Katana","Skull of the Eagle Sentry","Windcutter","The Seaweed Sword","Greeni","The Drenched Armor","The Scorched Armor","Throwing Spear","Book of the Rejuvenating River","The Scavenger's Attire","Wooden Armor of the Apple Tree","Broken Branch","Treesmasher's Tail","Head of the Riverborn","Firebreather's Tail","Shadowbone Sword","Shadowscale's Skull","Eyes of the Firebreather","Candlestick","Water from the River","Handcannon","Flames in a Bottle","Spikes of the Treesmasher","Wing Necklace","The Split Arrow","Champion's Attire","Practice Target","The River Robe","Head of the Firebreather","The Searing Shower", "Shadow Scales", "The Hidden Armor", "Loki's Raiment","Thor's Armor","Odin's Attire","Hela's Robe","Enchanted Uru Sword", "Gungnir","Hela's Power","Special Crate","Item Crate","Potion Crate","The Incombustible Robe","Music of the Gods", "Helment of Thor", "Thor's Bracelets","Hela's Horn's","Golden Asgardian Helmet","Loki's Dagger", "Obsidian Asgardian Helmet", "The Relentless Armor", "Warbringer's Flagpole", "Shadowscale's Horn","Loki's Horns","Mjolnir","Realm Power","Helm of Oryx","Armor of Oryx","Ring of Oryx","Gjallarhorn","Trickster's Toy","Arcane Bait","Sword of Oryx","Miscellaneous Crate","Robe of the Nature Goddess","Ring of the Nature Goddess","Platinum Asgardian Helmet","Spit of a Troll","Ortar's Enchantment","Gravedigger's Shovel","Staff of Nature","Spell Full of Nature","The Soul Ring","Sword of the Fallen","Helm of the Fallen","Armor of the Fallen","Trophy of the Fallen","Destructor Dagger","Destructor Armor","Destructor Cloak","Ring of the Destructor","Rotting Arm","Carrier's Suit","The Consumed Ring","Head Full of Brains","Soul Scatter","The Unbreakable Tombstone","The Soul Collector","Gravedigger's Disguise","Heavy Bow of the Asgard Guardian","Wooden Elegance","Leather Armor of the Asgard Guardian","Asgard's Tresure","Potion of Growth","Potion of Ants","Rigged Potion of the Alchemist","Dagger of Goddess of Goddesses","Armor of the Depths","Cloak of the 1000 Oceans","Oceanic Treasure","Quiver of the Asgard Ruins","Small Nodestone","Wand Full of Mana","Nodestone","Small Galactic Nodestone", "Galactic Nodestone", "Magnificent Receipt","Work of the Alchemist","Odin's Ravens","Ring of the Poker King","A Worthy Jewel","Blade of the Fallen Sky","Undead's Gross Bow","Dagger of the Endless Void","Radiant Wand of Royalism","Crystallized Ring of Hatred","Bright Robe of the Crystals","Crystallized Scepter","Molten Katana","Dreadstump's Rapier","Himura's Katana","Fang of Frost","Leviathan's Repentance","Hallow's End","Shattered War Axe","Metal Blood Bow","Sword of the Aquatic God","Seal of the Aquatic God","Armor of the Aquatic God","Ring of the Aquatic God","Ring of the Encounter","Sword of the Demon Lord","Helm of the Demon Lord","Armor of the Demon Lord","Ring of the Demon Lord","Wand of the Rising Star","Lucky Box","Lucky Potion","Hela's Essence","A Precious Rock","An actual cookie","A skull covered in chocolate","Ring of the Mystical Encounter","Scepter of the Encounter","The Frozen Tome","Ring of Ortar","Powerful Twig","Wooden Head from the Totem","Mysterious Incantation","Swamp Mirror","Asura","Traceless","Malevolent Armor","A trap made of cookies","A triangular cookie","A Desirable Ornament","Gray Belt","Hornshot","Spectral's Cloak","Forsaken Ring","Gem Gem's Gem","Reset Scroll (SP)","Linen Coat","Ring of the Cosmos","Potion of Life","Potion of Mana","Potion of Speed","Potion of Wisdom","Potion of Attack","Potion of Defense","Potion of Vitality"];
+var items = ["Sweet Sugar Rush Staff", "Shield of Vendettas", "Carnivorous Sentient Spell", "Candy Robe","Omega Ancient Sword","Alpha Ancient Seal","Ancient Stone Guardian Armor","Janus Eye Ring","Burger K-ring","Bow of the Lightning God","Lightning God Quiver", "Lightning God Armor","Lightning God Ring", "Acid Katana","Acid Star","Acid Armor","Acid Ring","The Searing Blood","PoOoOoOokkErrRr","Tail of the Riverborn","The Winged Wand","Doom Katana","Skull of the Eagle Sentry","Windcutter","The Seaweed Sword","Greeni","The Drenched Armor","The Scorched Armor","Throwing Spear","Book of the Rejuvenating River","The Scavenger's Attire","Wooden Armor of the Apple Tree","Broken Branch","Treesmasher's Tail","Head of the Riverborn","Firebreather's Tail","Shadowbone Sword","Shadowscale's Skull","Eyes of the Firebreather","Candlestick","Water from the River","Handcannon","Flames in a Bottle","Spikes of the Treesmasher","Wing Necklace","The Split Arrow","Champion's Attire","Practice Target","The River Robe","Head of the Firebreather","The Searing Shower", "Shadow Scales", "The Hidden Armor", "Loki's Raiment","Thor's Armor","Odin's Attire","Hela's Robe","Enchanted Uru Sword", "Gungnir","Hela's Power","Special Crate","Item Crate","Potion Crate","The Incombustible Robe","Music of the Gods", "Helmet of Thor", "Thor's Bracelets","Hela's Horn's","Golden Asgardian Helmet","Loki's Dagger", "Obsidian Asgardian Helmet", "The Relentless Armor", "Warbringer's Flagpole", "Shadowscale's Horn","Loki's Horns","Mjolnir","Realm Power","Helm of Oryx","Armor of Oryx","Ring of Oryx","Gjallarhorn","Trickster's Toy","Arcane Bait","Sword of Oryx","Miscellaneous Crate","Robe of the Nature Goddess","Ring of the Nature Goddess","Platinum Asgardian Helmet","Spit of a Troll","Ortar's Enchantment","Gravedigger's Shovel","Staff of Nature","Spell Full of Nature","The Soul Ring","Sword of the Fallen","Helm of the Fallen","Armor of the Fallen","Trophy of the Fallen","Destructor Dagger","Destructor Armor","Destructor Cloak","Ring of the Destructor","Rotting Arm","Carrier's Suit","The Consumed Ring","Head Full of Brains","Soul Scatter","The Unbreakable Tombstone","The Soul Collector","Gravedigger's Disguise","Heavy Bow of the Asgard Guardian","Wooden Elegance","Leather Armor of the Asgard Guardian","Asgard's Tresure","Potion of Growth","Potion of Ants","Rigged Potion of the Alchemist","Dagger of Goddess of Goddesses","Armor of the Depths","Cloak of the 1000 Oceans","Oceanic Treasure","Quiver of the Asgard Ruins","Small Nodestone","Wand Full of Mana","Nodestone","Small Galactic Nodestone", "Galactic Nodestone", "Magnificent Receipt","Work of the Alchemist","Odin's Ravens","Ring of the Poker King","A Worthy Jewel","Blade of the Fallen Sky","Undead's Gross Bow","Dagger of the Endless Void","Radiant Wand of Royalism","Crystallized Ring of Hatred","Bright Robe of the Crystals","Crystallized Scepter","Molten Katana","Dreadstump's Rapier","Himura's Katana","Fang of Frost","Leviathan's Repentance","Hallow's End","Shattered War Axe","Metal Blood Bow","Sword of the Aquatic God","Seal of the Aquatic God","Armor of the Aquatic God","Ring of the Aquatic God","Ring of the Encounter","Sword of the Demon Lord","Helm of the Demon Lord","Armor of the Demon Lord","Ring of the Demon Lord","Wand of the Rising Star","Lucky Box","Lucky Potion","Hela's Essence","A Precious Rock","An actual cookie","A skull covered in chocolate","Ring of the Mystical Encounter","Scepter of the Encounter","The Frozen Tome","Ring of Ortar","Powerful Twig","Wooden Head from the Totem","Mysterious Incantation","Swamp Mirror","Asura","Traceless","Malevolent Armor","A trap made of cookies","A triangular cookie","A Desirable Ornament","Gray Belt","Hornshot","Spectral's Cloak","Forsaken Ring","Gem Gem's Gem","Reset Scroll (SP)","Linen Coat","Ring of the Cosmos","Potion of Life","Potion of Mana","Potion of Speed","Potion of Wisdom","Potion of Attack","Potion of Defense","Potion of Vitality"];
 
 document.addEventListener("DOMContentLoaded", function(event) {
   var modal = document.getElementById('id01');
@@ -127,7 +127,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 
 var getHTML = function ( url, callback ) {
-
   // Feature detection
   if ( !window.XMLHttpRequest ) return;
 
@@ -137,14 +136,17 @@ var getHTML = function ( url, callback ) {
   // Setup callback
   xhr.onload = function() {
     if ( callback && typeof( callback ) === 'function' ) {
-      callback( this.responseXML );
+      if (xhr.readyState == 4){
+        console.log("?")
+        callback( this.responseText );
+      }
       //console.log("Loaded")
     }
   }
 
   // Get the HTML
   xhr.open( 'GET', url );
-  xhr.responseType = 'document';
+  xhr.responseType = 'text';
   xhr.send();
 
 };
@@ -155,10 +157,12 @@ function loginuser(email,psw) {
   document.getElementById('lbutton').textContent = "Logging you in..."
   email = (email.value).trim()
   psw = (psw.value).trim()
+  var parser = new DOMParser();
   const proxyurl = "https://cors-anywhere.herokuapp.com/"; // some CORS stuff lmao
 
-  getHTML( proxyurl+'http://192.223.31.195/account/verify?ignore=3548773&guid='+email+'&gameClientVersion=X2.2&cacheBust=522542&password='+psw, function (response) {
+  getHTML( proxyurl+'http://192.223.31.195/account/verify?ignore=3548773&guid='+email+'&gameClientVersion=X2.2&cacheBust=522542&password='+psw, function (responsestring) {
       //console.log('http://192.223.31.195/account/verify?ignore=3548773&guid='+email.value+'&gameClientVersion=X2.2&cacheBust=522542&password='+psw.value)
+      response = parser.parseFromString(responsestring,"application/xml")
       if(response.documentElement.innerHTML == "Bad Login") {
         document.getElementsByClassName("error")[0].setAttribute('style', 'display: inline;')
         document.getElementById('lbutton').textContent = "Login"
@@ -211,22 +215,32 @@ function searchMarket(search) {
   document.getElementById('SearchButton').textContent = "Searching..."
   const proxyurl = "https://cors-anywhere.herokuapp.com/"; // some CORS stuff lmao
   var modal = document.getElementById('id01');
-
+  var parser = new DOMParser();
   if(loggedin == true) {
     var header = document.getElementById("headerrow")
     buydataarray = []
     var totalprice = 0
     document.getElementById("tablelist").innerHTML = ""
     document.getElementById("tablelist").appendChild(header)
-    getHTML(proxyurl + "http://192.223.31.195/auctionHouse/search?g="+useremail+"cacheBust=381072&search="+search+"&password="+userpsw+"&guid="+useremail+"&ignore=2094010&ignoreId=48186&gameClientVersion=X2%2E2", function (response) {
-      //console.log("http://192.223.31.195/auctionHouse/search?g="+useremail+"cacheBust=381072&search="+search+"&password="+userpsw+"&guid="+useremail+"&ignore=2094010&ignoreId=48186&gameClientVersion=X2%2E2")
-      var el = document.createElement('html');
-      try{
-        el.innerHTML = response.documentElement.innerHTML;
-      } catch {
-        document.getElementById('SearchButton').textContent = "Item not found!"
-        setTimeout(function(){document.getElementById('SearchButton').textContent = "Search"}, 1000);
+    getHTML(proxyurl + "http://192.223.31.195/auctionHouse/search?g="+useremail+"cacheBust=381072&search="+search+"&password="+userpsw+"&guid="+useremail+"&ignore=2094010&ignoreId=48186&gameClientVersion=X2%2E2", function (responsetext) {
+      console.log("http://192.223.31.195/auctionHouse/search?g="+useremail+"cacheBust=381072&search="+search+"&password="+userpsw+"&guid="+useremail+"&ignore=2094010&ignoreId=48186&gameClientVersion=X2%2E2")
+      response = parser.parseFromString(responsetext,"application/xml")
+      if (response.getElementsByTagName("parsererror") != null) {
+        if (responsetext == "Item not found in XML data") {
+          document.getElementById('SearchButton').textContent = "No such item!"
+          setTimeout(function(){document.getElementById('SearchButton').textContent = "Search"}, 1000);
+        } else if (responsetext == "No results found for this item!" ){
+          document.getElementById('SearchButton').textContent = "No auctions found!"
+          setTimeout(function(){document.getElementById('SearchButton').textContent = "Search"}, 1000);
+        } else {
+          document.getElementById('SearchButton').textContent = "Please try again!"
+          setTimeout(function(){document.getElementById('SearchButton').textContent = "Search"}, 1000);
+        }
       }
+      var el = document.createElement('html');
+      el.innerHTML = response.documentElement.innerHTML;
+      console.log(el)
+
       for(i=0; i<el.getElementsByTagName('result').length; i++) {
         var row = document.createElement('tr')
         item = document.createElement('td')
