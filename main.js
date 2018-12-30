@@ -217,7 +217,7 @@ function searchMarket(search) {
     document.getElementById("tablelist").innerHTML = ""
     document.getElementById("tablelist").appendChild(header)
     getHTML(proxyurl + "http://192.223.31.195/auctionHouse/search?g="+useremail+"cacheBust=381072&search="+search+"&password="+userpsw+"&guid="+useremail+"&ignore=2094010&ignoreId=48186&gameClientVersion=X2%2E2", function (response) {
-      console.log("http://192.223.31.195/auctionHouse/search?g="+useremail+"cacheBust=381072&search="+search+"&password="+userpsw+"&guid="+useremail+"&ignore=2094010&ignoreId=48186&gameClientVersion=X2%2E2")
+      //console.log("http://192.223.31.195/auctionHouse/search?g="+useremail+"cacheBust=381072&search="+search+"&password="+userpsw+"&guid="+useremail+"&ignore=2094010&ignoreId=48186&gameClientVersion=X2%2E2")
       var el = document.createElement('html');
       try{
         el.innerHTML = response.documentElement.innerHTML;
@@ -297,7 +297,6 @@ function PurchaseItem(accID, time, price, type, saleID, butid) {
       //console.log("http://192.223.31.195/auctionHouse/buy?g="+useremail+"cacheBust=759569&id="+saleID+"&time="+time+"&password="+userpsw+"&type="+type+"&guid="+useremail+"&ignore=1899964&price="+price+"&accId="+accID+"&gameClientVersion=X2.2E2")
       userfame = (userfame-price)
       document.getElementById('fame').textContent = "Fame: " + (userfame);
-      //console.log(document.getElementById('fame').textContent)
       document.getElementById(butid).textContent = 'Gone'
       document.getElementById(butid).setAttribute('disabled', 'true')
     });
