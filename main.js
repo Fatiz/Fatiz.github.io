@@ -23,6 +23,12 @@ document.addEventListener("DOMContentLoaded", function(event) {
     var currentFocus;
     /*execute a function when someone writes in the text field:*/
     inp.addEventListener("input", function(e) {
+        console.log(this.value.length)
+        if(this.value.length == 0){
+          document.getElementById("SearchButton").setAttribute('disabled', 'true')
+        } else if(this.value.length > 0) {
+          document.getElementById("SearchButton").removeAttribute('disabled')
+        }
         var a, b, i, val = this.value;
         /*close any already open lists of autocompleted values*/
         closeAllLists();
@@ -77,8 +83,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
           /*If the ENTER key is pressed, prevent the form from being submitted,*/
           e.preventDefault();
           if (currentFocus > -1) {
-            /*and simulate a click on the "active" item:*/
+           // and simulate a click on the "active" item:
             if (x) x[currentFocus].click();
+            searchMarket(document.getElementById("myInput").value)
           }
         }
     });
@@ -259,6 +266,7 @@ function searchMarket(search) {
         time.setAttribute("style", "height: 60px; color: #7840CC")
         buy = document.createElement('button')
         buy.setAttribute('type', 'button')
+        buy.setAttribute('id', 'buybutton')
         buy.setAttribute('style', 'width: 50%; height: 80%; background-color: #8e4bf3; color: #ffffff !important;')
         // cancer
 
@@ -307,17 +315,21 @@ function PurchaseItem(accID, time, price, type, saleID, butid) {
   //console.log(accID,time,price,type,saleID);
   //console.log(loggedin, userfame)
   if(loggedin == true && userfame > price){
-    getHTML(proxyurl + "http://192.223.31.195/auctionHouse/buy?g="+useremail+"cacheBust=759569&id="+saleID+"&time="+time+"&password="+userpsw+"&type="+type+"&guid="+useremail+"&ignore=1899964&price="+price+"&accId="+accID+"&gameClientVersion=X2.2E2", function (response) {
-      
-      //console.log("http://192.223.31.195/auctionHouse/buy?g="+useremail+"cacheBust=759569&id="+saleID+"&time="+time+"&password="+userpsw+"&type="+type+"&guid="+useremail+"&ignore=1899964&price="+price+"&accId="+accID+"&gameClientVersion=X2.2E2")
-      userfame = (userfame-price)
-      document.getElementById('fame').textContent = "Fame: " + (userfame);
-      document.getElementById(butid).textContent = 'Gone'
-      document.getElementById(butid).setAttribute('disabled', 'true')
-    });
+    document.getElementById(butid).textContent = "Confirm?"
+    document.getElementById(butid).onclick = function() {
+      if(document.getElementById(butid).textContent == "Confirm?") {
+        getHTML(proxyurl + "http://192.223.31.195/auctionHouse/buy?g="+useremail+"cacheBust=759569&id="+saleID+"&time="+time+"&password="+userpsw+"&type="+type+"&guid="+useremail+"&ignore=1899964&price="+price+"&accId="+accID+"&gameClientVersion=X2.2E2", function (response) {
+          //console.log("http://192.223.31.195/auctionHouse/buy?g="+useremail+"cacheBust=759569&id="+saleID+"&time="+time+"&password="+userpsw+"&type="+type+"&guid="+useremail+"&ignore=1899964&price="+price+"&accId="+accID+"&gameClientVersion=X2.2E2")
+          userfame = (userfame-price)
+          document.getElementById('fame').textContent = "Fame: " + (userfame);
+          document.getElementById(butid).textContent = 'Bought!'
+          document.getElementById(butid).setAttribute('disabled', 'true')
+        });
+      }
+    };
   } else if(loggedin == false) {
     modal.style.display = 'inline';
-  } else if(userfame < price){
+  } else if(userfame < price) {
     document.getElementById(butid).textContent = "Not Enough Fame!"
     setTimeout(function(){document.getElementById(butid).textContent = "Buy"}, 1000);
   }
