@@ -183,8 +183,8 @@ function loginuser(email,psw) {
         document.getElementsByClassName('loginbutton')[0].appendChild(fameimg)
         modal.style.display = 'none';
         fame.style.display = 'inline';
-        useremail = email.value;
-        userpsw = psw.value;
+        useremail = email;
+        userpsw = psw;
         userfame = parseInt(el.getElementsByTagName('fame')[0].innerText)
         fame.textContent = "Fame: "+(accfame);
         fameimg.style.display = 'inline';
