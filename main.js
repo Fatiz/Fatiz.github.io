@@ -152,6 +152,7 @@ var getHTML = function ( url, callback ) {
 
 
 function loginuser(email,psw) {
+  document.getElementById('lbutton').textContent = "Logging you in..."
   email = (email.value).trim()
   psw = (psw.value).trim()
   const proxyurl = "https://cors-anywhere.herokuapp.com/"; // some CORS stuff lmao
@@ -160,6 +161,7 @@ function loginuser(email,psw) {
       //console.log('http://192.223.31.195/account/verify?ignore=3548773&guid='+email.value+'&gameClientVersion=X2.2&cacheBust=522542&password='+psw.value)
       if(response.documentElement.innerHTML == "Bad Login") {
         document.getElementsByClassName("error")[0].setAttribute('style', 'display: inline;')
+        document.getElementById('lbutton').textContent = "Login"
       } else if(response.getElementsByTagName('name') != null){
         var modal = document.getElementById('id01');
         var fame = document.createElement('label')
@@ -206,7 +208,7 @@ function loginuser(email,psw) {
 
 
 function searchMarket(search) {
-
+  document.getElementById('SearchButton').textContent = "Searching..."
   const proxyurl = "https://cors-anywhere.herokuapp.com/"; // some CORS stuff lmao
   var modal = document.getElementById('id01');
 
@@ -225,7 +227,6 @@ function searchMarket(search) {
         document.getElementById('SearchButton').textContent = "Item not found!"
         setTimeout(function(){document.getElementById('SearchButton').textContent = "Search"}, 1000);
       }
-      var i;
       for(i=0; i<el.getElementsByTagName('result').length; i++) {
         var row = document.createElement('tr')
         item = document.createElement('td')
@@ -275,6 +276,7 @@ function searchMarket(search) {
         row.appendChild(buy);
         document.getElementById('tablelist').appendChild(row)  
       }
+      document.getElementById('SearchButton').textContent = "Search"
       var avgprice = ( isNaN(Math.round(totalprice/buydataarray.length)) ? "N/A" : Math.round((totalprice/buydataarray.length)))
       document.getElementById("cost").textContent = "Price "+"- Avg. "+avgprice+" "
       fame2 = document.createElement('img')
