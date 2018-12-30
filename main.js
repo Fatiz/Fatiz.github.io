@@ -134,7 +134,7 @@ var getHTML = function ( url, callback ) {
   xhr.onload = function() {
     if ( callback && typeof( callback ) === 'function' ) {
       callback( this.responseXML );
-      console.log("Loaded")
+      //console.log("Loaded")
     }
   }
 
@@ -155,7 +155,7 @@ function loginuser(email,psw) {
   badlogin.style.display = 'none';
   document.getElementById('loginbox').appendChild(badlogin) 
   getHTML( proxyurl+'http://192.223.31.195/account/verify?ignore=3548773&guid='+email.value+'&gameClientVersion=X2.2&cacheBust=522542&password='+psw.value, function (response) {
-      console.log('http://192.223.31.195/account/verify?ignore=3548773&guid='+email.value+'&gameClientVersion=X2.2&cacheBust=522542&password='+psw.value)
+      //console.log('http://192.223.31.195/account/verify?ignore=3548773&guid='+email.value+'&gameClientVersion=X2.2&cacheBust=522542&password='+psw.value)
       if(response.documentElement.innerHTML == "Bad Login") {
         badlogin.style.display = 'inline';
       } else if(response.getElementsByTagName('name') != null){
@@ -206,7 +206,7 @@ function loginuser(email,psw) {
 function searchMarket(search) {
 
   const proxyurl = "https://cors-anywhere.herokuapp.com/"; // some CORS stuff lmao
-  
+  var modal = document.getElementById('id01');
 
   if(loggedin == true) {
     var header = document.getElementById("headerrow")
@@ -273,7 +273,8 @@ function searchMarket(search) {
         row.appendChild(buy);
         document.getElementById('tablelist').appendChild(row)  
       }
-      document.getElementById("cost").textContent = "Price "+"- Avg. "+Math.round((totalprice/buydataarray.length))+" "
+      var avgprice = ( isNaN(Math.round(totalprice/buydataarray.length)) ? "N/A" : Math.round((totalprice/buydataarray.length)))
+      document.getElementById("cost").textContent = "Price "+"- Avg. "+avgprice+" "
       fame2 = document.createElement('img')
       fame2.setAttribute('src','fame.png')
       document.getElementById('cost').appendChild(fame2)
