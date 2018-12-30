@@ -10,7 +10,11 @@ var items = ["Sweet Sugar Rush Staff", "Shield of Vendettas", "Carnivorous Senti
 
 document.addEventListener("DOMContentLoaded", function(event) {
   var modal = document.getElementById('id01');
-
+  var badlogin = document.createElement('label')
+  badlogin.className = 'error';
+  badlogin.textContent = "Bad Login";
+  badlogin.style.display = 'none';
+  document.getElementById('loginbox').appendChild(badlogin) 
 
   function autocomplete(inp, arr) {
     /*the autocomplete function takes two arguments,
@@ -148,16 +152,14 @@ var getHTML = function ( url, callback ) {
 
 
 function loginuser(email,psw) {
+  email = (email.value).trim()
+  psw = (psw.value).trim()
   const proxyurl = "https://cors-anywhere.herokuapp.com/"; // some CORS stuff lmao
-  var badlogin = document.createElement('label')
-  badlogin.className = 'error';
-  badlogin.textContent = "Bad Login";
-  badlogin.style.display = 'none';
-  document.getElementById('loginbox').appendChild(badlogin) 
-  getHTML( proxyurl+'http://192.223.31.195/account/verify?ignore=3548773&guid='+email.value+'&gameClientVersion=X2.2&cacheBust=522542&password='+psw.value, function (response) {
+
+  getHTML( proxyurl+'http://192.223.31.195/account/verify?ignore=3548773&guid='+email+'&gameClientVersion=X2.2&cacheBust=522542&password='+psw, function (response) {
       //console.log('http://192.223.31.195/account/verify?ignore=3548773&guid='+email.value+'&gameClientVersion=X2.2&cacheBust=522542&password='+psw.value)
       if(response.documentElement.innerHTML == "Bad Login") {
-        badlogin.style.display = 'inline';
+        document.getElementsByClassName("error")[0].setAttribute('style', 'display: inline;')
       } else if(response.getElementsByTagName('name') != null){
         var modal = document.getElementById('id01');
         var fame = document.createElement('label')
