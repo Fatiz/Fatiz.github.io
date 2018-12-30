@@ -137,7 +137,6 @@ var getHTML = function ( url, callback ) {
   xhr.onload = function() {
     if ( callback && typeof( callback ) === 'function' ) {
       if (xhr.readyState == 4){
-        console.log("?")
         callback( this.responseText );
       }
       //console.log("Loaded")
@@ -223,7 +222,7 @@ function searchMarket(search) {
     document.getElementById("tablelist").innerHTML = ""
     document.getElementById("tablelist").appendChild(header)
     getHTML(proxyurl + "http://192.223.31.195/auctionHouse/search?g="+useremail+"cacheBust=381072&search="+search+"&password="+userpsw+"&guid="+useremail+"&ignore=2094010&ignoreId=48186&gameClientVersion=X2%2E2", function (responsetext) {
-      console.log("http://192.223.31.195/auctionHouse/search?g="+useremail+"cacheBust=381072&search="+search+"&password="+userpsw+"&guid="+useremail+"&ignore=2094010&ignoreId=48186&gameClientVersion=X2%2E2")
+      //console.log("http://192.223.31.195/auctionHouse/search?g="+useremail+"cacheBust=381072&search="+search+"&password="+userpsw+"&guid="+useremail+"&ignore=2094010&ignoreId=48186&gameClientVersion=X2%2E2")
       response = parser.parseFromString(responsetext,"application/xml")
       if (response.getElementsByTagName("parsererror")[0] != null) {
         if (responsetext == "Item not found in XML data") {
@@ -239,7 +238,6 @@ function searchMarket(search) {
       }
       var el = document.createElement('html');
       el.innerHTML = response.documentElement.innerHTML;
-      console.log(el)
 
       for(i=0; i<el.getElementsByTagName('result').length; i++) {
         var row = document.createElement('tr')
