@@ -276,12 +276,12 @@ function searchMarket(search) {
         row.appendChild(buy);
         document.getElementById('tablelist').appendChild(row)  
       }
-      document.getElementById('SearchButton').textContent = "Search"
       var avgprice = ( isNaN(Math.round(totalprice/buydataarray.length)) ? "N/A" : Math.round((totalprice/buydataarray.length)))
       document.getElementById("cost").textContent = "Price "+"- Avg. "+avgprice+" "
       fame2 = document.createElement('img')
       fame2.setAttribute('src','fame.png')
       document.getElementById('cost').appendChild(fame2)
+      if(document.getElementById('SearchButton').textContent == "Searching...") {document.getElementById('SearchButton').textContent="Search"}
     });
   } else {
     modal.style.display = 'inline'
