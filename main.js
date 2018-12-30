@@ -23,7 +23,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
     var currentFocus;
     /*execute a function when someone writes in the text field:*/
     inp.addEventListener("input", function(e) {
-        console.log(this.value.length)
         if(this.value.length == 0){
           document.getElementById("SearchButton").setAttribute('disabled', 'true')
         } else if(this.value.length > 0) {
@@ -57,6 +56,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 inp.value = this.getElementsByTagName("input")[0].value;
                 /*close the list of autocompleted values,
                 (or any other open lists of autocompleted values:*/
+                searchMarket(inp.value)
                 closeAllLists();
             });
             a.appendChild(b);
