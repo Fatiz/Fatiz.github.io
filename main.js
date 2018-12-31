@@ -201,7 +201,7 @@ function loginuser(email,psw) {
         fame.textContent = "Fame: "+(accfame);
         fameimg.style.display = 'inline';
         userrank = parseInt(el.getElementsByTagName('rank')[0].innerText)
-        if(userrank == 4 && document.getElementById('donatewarning') == null) {
+        if(userrank >= 4 && userrank < 100 && document.getElementById('donatewarning') == null) {
           donatewarning = document.createElement("label")
           donatewarning.setAttribute('id', 'donatewarning')
           donatewarning.textContent = "You are unable to purchase items off the auction house as you are P4"
