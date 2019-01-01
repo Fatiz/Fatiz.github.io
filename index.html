@@ -67,6 +67,55 @@ body {
   background-attachment: fixed;
   background-repeat: no-repeat;
   text-align: center;
+  -webkit-overflow-scrolling: touch;
+  overflow-x: auto;
+}
+.button.resultspecial{
+    font-size: .7VW; 
+    width: 8vw; 
+  }
+@media 
+only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px)  {
+
+  /* Force table to not be like tables anymore */
+  table, thead, tbody, th, td, tr { 
+    display: block; 
+  }
+  #headerrow {
+    display: none;
+  }
+  .button.resultspecial{
+    font-size: 4VW; 
+    width: 100%;
+  }
+  
+  /* Hide table headers (but not display: none;, for accessibility) */
+  thead tr { 
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+  
+  tr { border: 1px solid #ccc; }
+  
+  td { 
+    /* Behave  like a "row" */
+    border: none;
+    border-bottom: 1px solid #eee; 
+    position: relative;
+    padding-left: 50%; 
+  }
+  td:before { 
+    /* Now like a table header */
+    position: absolute;
+    /* Top/left values mimic padding */
+    top: 6px;
+    left: 6px;
+    width: 45%; 
+    padding-right: 10px; 
+    white-space: nowrap;
+  }
 }
 .autocomplete-items div {
   padding: 10px;
@@ -136,6 +185,7 @@ span.psw {
     background-color: #fff;
     color: #7840CC !important;
 }
+
 /* The Modal (background) */
 .modal {
   display: none; /* Hidden by default */
@@ -223,10 +273,10 @@ span.psw {
     <div class="container" id="loginbox">
       <h2>You must login to your RotF account to use this website</h2>
       <label for="uname" style="font-size: 14; color: #fff; font-weight: 100;!important">Email</label>
-      <input type="text" style="width: 75%" placeholder="Enter Email" name="email" required>
+      <input type="text" id="emailinput"style="width: 75%" placeholder="Enter Email" name="email" required>
 
       <label for="psw" style="color: #fff; font-weight: 100; !important">Password</label>
-      <input type="password" style="width: 75%"  placeholder="Enter Password" name="psw" required>
+      <input type="password" id="pswinput" style="width: 75%"  placeholder="Enter Password" name="psw" required>
         
       <button id='lbutton' type="button" onclick="loginuser(email,psw)" class="button bannerSpecial">Login</button>
     </div>
@@ -247,7 +297,7 @@ span.psw {
 </section>
 <section id="table">
   <div class="table">
-    <table style="height: 34px; position: absolute; top: auto;" width="800">
+    <table style="height: 34px; position: absolute; top: auto;" width="100%" border="0" cellspacing="0" cellpadding="0">
       <tbody id='tablelist'>
         <tr id='headerrow'>
           <td style="width: 130px; height: 60px;"><b>Item</b></td>

@@ -16,7 +16,11 @@ document.addEventListener("DOMContentLoaded", function(event) {
   badlogin.textContent = "Bad Login";
   badlogin.style.display = 'none';
   document.getElementById('loginbox').appendChild(badlogin) 
-
+  document.getElementById("loginbox").addEventListener("keydown",function(e){
+    if(e.keyCode == 13 &&  (document.getElementById('pswinput').value.length > 0) && (document.getElementById('emailinput').value.length>0) ) {
+      loginuser(document.getElementById('emailinput'),document.getElementById('pswinput'))
+    }
+  });
   function autocomplete(inp, arr) {
     /*the autocomplete function takes two arguments,
     the text field element and an array of possible autocompleted values:*/
@@ -42,12 +46,12 @@ document.addEventListener("DOMContentLoaded", function(event) {
         /*for each item in the array...*/
         for (i = 0; i < arr.length; i++) {
           /*check if the item starts with the same letters as the text field value:*/
-          if (arr[i].includes(val)) {
+          if ((arr[i].toUpperCase()).includes(val.toUpperCase())) {
             /*create a DIV element for each matching element:*/
             b = document.createElement("DIV");
             /*make the matching letters bold:*/
-            b.innerHTML = arr[i].substr(0, (arr[i].indexOf(val)) )+ "<strong style='color: #ff3f05; font-weight: 300';> " + arr[i].substr( arr[i].indexOf(val), val.length ) + "</strong>";
-            b.innerHTML += arr[i].substr( (arr[i].indexOf(val)+val.length) , arr[i].length);
+            b.innerHTML = arr[i].substr(0, ((arr[i].toUpperCase()).indexOf(val.toUpperCase())) )+ "<strong style='color: #ff3f05; font-weight: 300';>" + arr[i].substr( (arr[i].toUpperCase()).indexOf(val.toUpperCase()), val.length ) + "</strong>";
+            b.innerHTML += arr[i].substr( ((arr[i].toUpperCase()).indexOf(val.toUpperCase())+val.length) , arr[i].length);
             /*insert a input field that will hold the current array item's value:*/
             b.innerHTML += '<input type="hidden" value="' + arr[i] + '">'; // Change back to hidden
             /*execute a function when someone clicks on the item value (DIV element):*/
@@ -62,6 +66,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
             a.appendChild(b);
           }
         }
+
     });
     /*execute a function presses a key on the keyboard:*/
     inp.addEventListener("keydown", function(e) {
@@ -166,7 +171,7 @@ function loginuser(email,psw) {
   psw = (psw.value).trim()
   var parser = new DOMParser();
 
-  getHTML( 'https://rotf.io/authProxy.php?ignore=3548773&guid='+email+'&gameClientVersion=X2.2&cacheBust=522542&password='+psw, function (responsestring) {
+  getHTML( 'https://cors-anywhere.herokuapp.com/' + 'https://rotf.io/authProxy.php?ignore=3548773&guid='+email+'&gameClientVersion=X2.2&cacheBust=522542&password='+psw, function (responsestring) {
       //console.log('http://192.223.31.195/account/verify?ignore=3548773&guid='+email.value+'&gameClientVersion=X2.2&cacheBust=522542&password='+psw.value)
       response = parser.parseFromString(responsestring,"application/xml")
       if(response.documentElement.innerHTML == "Bad Login") {
@@ -177,6 +182,12 @@ function loginuser(email,psw) {
         var fame = document.createElement('label')
         fame.style.display = 'none';
         fame.setAttribute('id', 'fame')
+        fame.setAttribute('style', "font-size: 1.2em;")
+        //      <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+        var logout = document.createElement('span')
+        logout.setAttribute('onclick',"console.log('test')")
+        logout.textContent = '&times;'
+        fame.appendChild(logout)
         var br = document.createElement('br');
         br.setAttribute('id', br)
         //fame img
@@ -208,8 +219,6 @@ function loginuser(email,psw) {
           document.getElementById('delay').appendChild(donatewarning)
         }
 
-
-        //document.documentElement.innerHTML = response.documentElement.body.account.stats.fame.innerHTML;
       }
       
 
@@ -218,16 +227,16 @@ function loginuser(email,psw) {
 
 
 function searchMarket(search) {
-  document.getElementById('SearchButton').textContent = "Searching..."
   var modal = document.getElementById('id01');
   var parser = new DOMParser();
   if(loggedin == true) {
+    document.getElementById('SearchButton').textContent = "Searching..."
     var header = document.getElementById("headerrow")
     buydataarray = []
     var totalprice = 0
     document.getElementById("tablelist").innerHTML = ""
     document.getElementById("tablelist").appendChild(header)
-    getHTML("https://rotf.io/searchProxy.php?search?g="+useremail+"cacheBust=381072&search="+search+"&password="+userpsw+"&guid="+useremail+"&ignore=2094010&ignoreId=48186&gameClientVersion=X2%2E2", function (responsetext) {
+    getHTML('https://cors-anywhere.herokuapp.com/'+ "https://rotf.io/searchProxy.php?search?g="+useremail+"cacheBust=381072&search="+search+"&password="+userpsw+"&guid="+useremail+"&ignore=2094010&ignoreId=48186&gameClientVersion=X2%2E2", function (responsetext) {
       //console.log("http://192.223.31.195/auctionHouse/search?g="+useremail+"cacheBust=381072&search="+search+"&password="+userpsw+"&guid="+useremail+"&ignore=2094010&ignoreId=48186&gameClientVersion=X2%2E2")
       response = parser.parseFromString(responsetext,"application/xml")
       if (response.getElementsByTagName("parsererror")[0] != null) {
@@ -247,6 +256,7 @@ function searchMarket(search) {
 
       for(i=0; i<el.getElementsByTagName('result').length; i++) {
         var row = document.createElement('tr')
+        row.setAttribute('id','searchresult')
         item = document.createElement('td')
         item.textContent = search
         item.setAttribute("style", "height: 60px; color: #7840CC")
@@ -255,17 +265,19 @@ function searchMarket(search) {
         seller.setAttribute("style", "height: 60px; color: #7840CC")
         price = document.createElement('td')
         price.textContent = el.getElementsByTagName('price')[i].textContent + " "
-        price.setAttribute("style", "height: 60px;  width: 40px; color: #7840CC")
+        price.setAttribute("style", "height: 60px; color: #7840CC")
         fame = document.createElement('img')
         fame.setAttribute('src', 'fame.png')
         price.appendChild(fame)
         time = document.createElement('td')
         time.textContent = el.getElementsByTagName('hours')[i].textContent + " Hours"
         time.setAttribute("style", "height: 60px; color: #7840CC")
+        buytd = document.createElement('td')
         buy = document.createElement('button')
         buy.setAttribute('type', 'button')
         buy.setAttribute('id', 'buybutton')
-        buy.setAttribute('style', 'width: 50%; height: 80%; background-color: #8e4bf3; color: #ffffff !important;')
+        buy.setAttribute('style', 'height: 80%; background-color: #8e4bf3; color: #ffffff !important; text-align: center;')
+        buy.setAttribute('class', 'button resultspecial')
         // cancer
 
         accid = el.getElementsByTagName('accid')[i].textContent
@@ -278,21 +290,21 @@ function searchMarket(search) {
         //what
         buydataarray.push([accid,realtime,pricevalue,typeid,saleid,buy.id])
         //console.log(buydataarray[i])
-        if(userrank == 4) {
+        if(userrank >= 4 && userrank < 100) {
           buy.setAttribute('disabled', 'true')
+          buy.setAttribute('style', 'height: 80%; background-color: #8e4bf3; color: #ffffff !important; text-align: center;')
           buy.textContent = "Disabled"
         } else {
           buy.setAttribute('onclick', "PurchaseItem.apply(null, buydataarray[id])")
           buy.textContent = "Buy"
-          buy.setAttribute('class', 'button bannerSpecial')
         }
 
-
+        buytd.appendChild(buy)
         row.appendChild(item);
         row.appendChild(seller);
         row.appendChild(price);
         row.appendChild(time);
-        row.appendChild(buy);
+        row.appendChild(buytd);
         document.getElementById('tablelist').appendChild(row)  
       }
       var avgprice = ( isNaN(Math.round(totalprice/buydataarray.length)) ? "N/A" : Math.round((totalprice/buydataarray.length)))
@@ -313,7 +325,7 @@ function PurchaseItem(accID, time, price, type, saleID, butid) {
     document.getElementById(butid).textContent = "Confirm?"
     document.getElementById(butid).onclick = function() {
       if(document.getElementById(butid).textContent == "Confirm?") {
-        getHTML("https://rotf.io/buyProxy.php?g="+useremail+"cacheBust=759569&id="+saleID+"&time="+time+"&password="+userpsw+"&type="+type+"&guid="+useremail+"&ignore=1899964&price="+price+"&accId="+accID+"&gameClientVersion=X2.2E2", function (response) {
+        getHTML('https://cors-anywhere.herokuapp.com/'+"https://rotf.io/buyProxy.php?g="+useremail+"cacheBust=759569&id="+saleID+"&time="+time+"&password="+userpsw+"&type="+type+"&guid="+useremail+"&ignore=1899964&price="+price+"&accId="+accID+"&gameClientVersion=X2.2E2", function (response) {
           //console.log("http://192.223.31.195/auctionHouse/buy?g="+useremail+"cacheBust=759569&id="+saleID+"&time="+time+"&password="+userpsw+"&type="+type+"&guid="+useremail+"&ignore=1899964&price="+price+"&accId="+accID+"&gameClientVersion=X2.2E2")
           userfame = (userfame-price)
           document.getElementById('fame').textContent = "Fame: " + (userfame);
@@ -326,8 +338,7 @@ function PurchaseItem(accID, time, price, type, saleID, butid) {
     modal.style.display = 'inline';
   } else if(userfame < price) {
     document.getElementById(butid).textContent = "Not Enough Fame!"
-    document.getElementById(butid).setAttribute('style','font-size: 0.5em; width: 50%; height: 80%; background-color: #8e4bf3; color: #ffffff !important;')
-    setTimeout(function(){document.getElementById(butid).textContent = "Buy", document.getElementById(butid).setAttribute('style','font-size: 1.5em;  width: 50%; height: 80%; background-color: #8e4bf3; color: #ffffff !important;')}, 1000);
+    setTimeout(function(){document.getElementById(butid).textContent = "Buy"}, 1000);
   }
 }
 
