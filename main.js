@@ -18,6 +18,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
     } else {
       console.log('failed')
     }
+  } else {
+    console.log("no data")
   }
 
 
