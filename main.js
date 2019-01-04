@@ -10,6 +10,21 @@ var items = ["Sweet Sugar Rush Staff", "Shield of Vendettas", "Carnivorous Senti
 // all by hand... help me - Fatiz
 
 document.addEventListener("DOMContentLoaded", function(event) {
+    // autologin scuffed maybe?
+  if(document.getElementById("password").length > 0 && document.getElementById("email").length > 0 ) {
+    // attempt to login
+    if(loginuser(((document.getElementById("email").value).trim()),(document.getElementById("password").trim())) != "Badlogin") {
+      document.getElementById('id01').style.display='none'
+    } else {
+      console.log('failed')
+    }
+  }
+
+
+
+
+
+
   var modal = document.getElementById('id01');
   var badlogin = document.createElement('label')
   badlogin.className = 'error';
@@ -17,10 +32,18 @@ document.addEventListener("DOMContentLoaded", function(event) {
   badlogin.style.display = 'none';
   document.getElementById('loginbox').appendChild(badlogin) 
   document.getElementById("loginbox").addEventListener("keydown",function(e){
-    if(e.keyCode == 13 &&  (document.getElementById('pswinput').value.length > 0) && (document.getElementById('emailinput').value.length>0) ) {
-      loginuser(document.getElementById('emailinput'),document.getElementById('pswinput'))
+    if(e.keyCode == 13 &&  (document.getElementById('password').value.length > 0) && (document.getElementById('email').value.length>0) ) {
+      loginuser(document.getElementById('email'),document.getElementById('password'))
     }
   });
+
+
+
+
+
+
+
+
   function autocomplete(inp, arr) {
     /*the autocomplete function takes two arguments,
     the text field element and an array of possible autocompleted values:*/
@@ -90,8 +113,13 @@ document.addEventListener("DOMContentLoaded", function(event) {
           if (currentFocus > -1) {
            // and simulate a click on the "active" item:
             if (x) x[currentFocus].click();
-
+          }else {
+            if(((document.getElementById("myInput").value).length) > 0) {
+              searchMarket(document.getElementById("myInput").value)
+              console.log()
+            }
           }
+
         }
     });
     function addActive(x) {
@@ -137,8 +165,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
 });
 
 
-
-
 var getHTML = function ( url, callback ) {
   // Feature detection
   if ( !window.XMLHttpRequest ) return;
@@ -171,12 +197,13 @@ function loginuser(email,psw) {
   psw = (psw.value).trim()
   var parser = new DOMParser();
 
-  getHTML('https://rotf.io/authProxy.php?ignore=3548773&guid='+email+'&gameClientVersion=X2.2&cacheBust=522542&password='+psw, function (responsestring) {
+  getHTML('https://cors-anywhere.herokuapp.com/'+'https://rotf.io/authProxy.php?ignore=3548773&guid='+email+'&gameClientVersion=X2.2&cacheBust=522542&password='+psw, function (responsestring) {
       //console.log('http://192.223.31.195/account/verify?ignore=3548773&guid='+email.value+'&gameClientVersion=X2.2&cacheBust=522542&password='+psw.value)
       response = parser.parseFromString(responsestring,"application/xml")
       if(response.documentElement.innerHTML == "Bad Login") {
         document.getElementsByClassName("error")[0].setAttribute('style', 'display: inline;')
         document.getElementById('lbutton').textContent = "Login"
+        return("Badlogin")
       } else if(response.getElementsByTagName('name') != null){
         var modal = document.getElementById('id01');
         var fame = document.createElement('label')
@@ -236,14 +263,14 @@ function searchMarket(search) {
     var totalprice = 0
     document.getElementById("tablelist").innerHTML = ""
     document.getElementById("tablelist").appendChild(header)
-    getHTML("https://rotf.io/searchProxy.php?search?g="+useremail+"cacheBust=381072&search="+search+"&password="+userpsw+"&guid="+useremail+"&ignore=2094010&ignoreId=48186&gameClientVersion=X2%2E2", function (responsetext) {
+    getHTML('https://cors-anywhere.herokuapp.com/'+"https://rotf.io/searchProxy.php?search?g="+useremail+"cacheBust=381072&search="+search+"&password="+userpsw+"&guid="+useremail+"&ignore=2094010&ignoreId=48186&gameClientVersion=X2%2E2", function (responsetext) {
       //console.log("http://192.223.31.195/auctionHouse/search?g="+useremail+"cacheBust=381072&search="+search+"&password="+userpsw+"&guid="+useremail+"&ignore=2094010&ignoreId=48186&gameClientVersion=X2%2E2")
       response = parser.parseFromString(responsetext,"application/xml")
       if (response.getElementsByTagName("parsererror")[0] != null) {
-        if (responsetext == "Item not found in XML data") {
+        if (responsetext.trim() == "Item not found in XML data") {
           document.getElementById('SearchButton').textContent = "No such item!"
           setTimeout(function(){document.getElementById('SearchButton').textContent = "Search"}, 1000);
-        } else if (responsetext == "No results found for this item!" ){
+        } else if (responsetext.trim() == "No results found for this item!" ){
           document.getElementById('SearchButton').textContent = "No auctions found!"
           setTimeout(function(){document.getElementById('SearchButton').textContent = "Search"}, 1000);
         } else {
@@ -325,7 +352,7 @@ function PurchaseItem(accID, time, price, type, saleID, butid) {
     document.getElementById(butid).textContent = "Confirm?"
     document.getElementById(butid).onclick = function() {
       if(document.getElementById(butid).textContent == "Confirm?") {
-        getHTML("https://rotf.io/buyProxy.php?g="+useremail+"cacheBust=759569&id="+saleID+"&time="+time+"&password="+userpsw+"&type="+type+"&guid="+useremail+"&ignore=1899964&price="+price+"&accId="+accID+"&gameClientVersion=X2.2E2", function (response) {
+        getHTML('https://cors-anywhere.herokuapp.com/'+"https://rotf.io/buyProxy.php?g="+useremail+"cacheBust=759569&id="+saleID+"&time="+time+"&password="+userpsw+"&type="+type+"&guid="+useremail+"&ignore=1899964&price="+price+"&accId="+accID+"&gameClientVersion=X2.2E2", function (response) {
           //console.log("http://192.223.31.195/auctionHouse/buy?g="+useremail+"cacheBust=759569&id="+saleID+"&time="+time+"&password="+userpsw+"&type="+type+"&guid="+useremail+"&ignore=1899964&price="+price+"&accId="+accID+"&gameClientVersion=X2.2E2")
           userfame = (userfame-price)
           document.getElementById('fame').textContent = "Fame: " + (userfame);
