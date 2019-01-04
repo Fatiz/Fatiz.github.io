@@ -10,22 +10,6 @@ var items = ["Sweet Sugar Rush Staff", "Shield of Vendettas", "Carnivorous Senti
 // all by hand... help me - Fatiz
 
 document.addEventListener("DOMContentLoaded", function(event) {
-    // autologin scuffed maybe?
-  if(document.getElementById("password").length > 0 && document.getElementById("email").length > 0 ) {
-    // attempt to login
-    if(loginuser(((document.getElementById("email").value).trim()),(document.getElementById("password").trim())) != "Badlogin") {
-      document.getElementById('id01').style.display='none'
-    } else {
-      console.log('failed')
-    }
-  } else {
-    console.log("no data")
-  }
-
-
-
-
-
 
   var modal = document.getElementById('id01');
   var badlogin = document.createElement('label')
