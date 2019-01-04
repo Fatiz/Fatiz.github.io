@@ -176,7 +176,7 @@ function loginuser(email,psw) {
   psw = (psw.value).trim()
   var parser = new DOMParser();
 
-  getHTML('https://cors-anywhere.herokuapp.com/ '+'https://rotf.io/authProxy.php?ignore=3548773&guid='+email+'&gameClientVersion=X2.2&cacheBust=522542&password='+psw, function (responsestring) {
+  getHTML('https://rotf.io/authProxy.php?ignore=3548773&guid='+email+'&gameClientVersion=X2.2&cacheBust=522542&password='+psw, function (responsestring) {
       //console.log('http://192.223.31.195/account/verify?ignore=3548773&guid='+email.value+'&gameClientVersion=X2.2&cacheBust=522542&password='+psw.value)
       response = parser.parseFromString(responsestring,"application/xml")
       if(response.documentElement.innerHTML == "Bad Login") {
@@ -242,7 +242,7 @@ function searchMarket(search) {
     var totalprice = 0
     document.getElementById("tablelist").innerHTML = ""
     document.getElementById("tablelist").appendChild(header)
-    getHTML('https://cors-anywhere.herokuapp.com/ '+"https://rotf.io/searchProxy.php?search?g="+useremail+"cacheBust=381072&search="+search+"&password="+userpsw+"&guid="+useremail+"&ignore=2094010&ignoreId=48186&gameClientVersion=X2%2E2", function (responsetext) {
+    getHTML("https://rotf.io/searchProxy.php?search?g="+useremail+"cacheBust=381072&search="+search+"&password="+userpsw+"&guid="+useremail+"&ignore=2094010&ignoreId=48186&gameClientVersion=X2%2E2", function (responsetext) {
       //console.log("http://192.223.31.195/auctionHouse/search?g="+useremail+"cacheBust=381072&search="+search+"&password="+userpsw+"&guid="+useremail+"&ignore=2094010&ignoreId=48186&gameClientVersion=X2%2E2")
       response = parser.parseFromString(responsetext,"application/xml")
       if (response.getElementsByTagName("parsererror")[0] != null) {
@@ -331,7 +331,7 @@ function PurchaseItem(accID, time, price, type, saleID, butid) {
     document.getElementById(butid).textContent = "Confirm?"
     document.getElementById(butid).onclick = function() {
       if(document.getElementById(butid).textContent == "Confirm?") {
-        getHTML('https://cors-anywhere.herokuapp.com/ '+"https://rotf.io/buyProxy.php?g="+useremail+"cacheBust=759569&id="+saleID+"&time="+time+"&password="+userpsw+"&type="+type+"&guid="+useremail+"&ignore=1899964&price="+price+"&accId="+accID+"&gameClientVersion=X2.2E2", function (response) {
+        getHTML("https://rotf.io/buyProxy.php?g="+useremail+"cacheBust=759569&id="+saleID+"&time="+time+"&password="+userpsw+"&type="+type+"&guid="+useremail+"&ignore=1899964&price="+price+"&accId="+accID+"&gameClientVersion=X2.2E2", function (response) {
           //console.log("http://192.223.31.195/auctionHouse/buy?g="+useremail+"cacheBust=759569&id="+saleID+"&time="+time+"&password="+userpsw+"&type="+type+"&guid="+useremail+"&ignore=1899964&price="+price+"&accId="+accID+"&gameClientVersion=X2.2E2")
           userfame = (userfame-price)
           document.getElementById('fame').textContent = "Fame: " + (userfame);
